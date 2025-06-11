@@ -27,6 +27,9 @@ export function App(params) {
 
   const handleInputChange = function (event) {
     log("in handleInputChange()");
+    const { name, value } = event.target;
+    let newFormObject = { ...formObject, [name]: value };
+    setFormObject(newFormObject);
   }
 
   let onCancelClick = function () {
@@ -36,10 +39,24 @@ export function App(params) {
 
   let onDeleteClick = function () {
     log("in onDeleteClick()");
+    if (formObject.id >= 0) {
+      deleteById(formObject.id);
+      setFormObject(blankCustomer);
+    } else {
+      alert("Nothing to delete");
+    }
   }
 
   let onSaveClick = function () {
     log("in onSaveClick()");
+    if (mode === 'Add') {
+      post(formObject);
+    }
+    if (mode === 'Update') {
+      put(formObject.id, formObject);
+    }
+    setFormObject(blankCustomer);
+  
   }
 
   return (
@@ -82,6 +99,7 @@ export function App(params) {
               <td><input
                 type="text"
                 name="name"
+                onChange={(e) => handleInputChange(e)}
                 value={formObject.name}
                 placeholder="Customer Name"
                 required /></td>
@@ -91,14 +109,16 @@ export function App(params) {
               <td><input
                 type="email"
                 name="email"
+                onChange={(e) => handleInputChange(e)}
                 value={formObject.email}
                 placeholder="name@company.com" /></td>
             </tr>
             <tr>
               <td className={'label'} >Pass:</td>
               <td><input
-                type="text"
+                type="password"
                 name="password"
+                onChange={(e) => handleInputChange(e)}
                 value={formObject.password}
                 placeholder="password" /></td>
             </tr>
