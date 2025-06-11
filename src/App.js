@@ -22,6 +22,11 @@ export function App(params) {
 
   const handleListClick = function(item){
     log("in handleListClick()");
+    if (item.id === formObject.id ) {
+      log("Item already selected, deselecting");
+      setFormObject(blankCustomer);
+      return;
+    }
     setFormObject(item);
   }  
 
