@@ -69,6 +69,7 @@ div#root {
 
 .selected {
     font-weight: bold;
+    background-color: rgb(37, 98, 148);
 }
 
 table#customer-add-update tbody tr td.label{
