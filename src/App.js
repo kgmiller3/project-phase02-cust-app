@@ -56,6 +56,10 @@ export function App(params) {
    
      let onSaveClick = function () {
        log("in onSaveClick()");
+        if (formObject.name === "" || formObject.email === "" || formObject.password === "") {
+          alert("Please fill in all fields");
+          return;
+        }
        if (mode === 'Add') {
          post(formObject);
        }
